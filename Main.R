@@ -5,7 +5,7 @@ tryCatch({
 }, finally = {})
 
 tryCatch( {
-  outputFolder <- file.path(getwd(), 'my_results')
+  outputFolder <- file.path(getwd(), 'results')
   dir.create(outputFolder, showWarnings = F)
   dbms <- Sys.getenv("DBMS_TYPE")
   connectionString <- Sys.getenv("CONNECTION_STRING")
@@ -31,15 +31,24 @@ tryCatch( {
     cohortTable = cohortTable
   )
   settings <- GenerateSurvival::settingsGs()
-  res <- purrr::map_dfr(settings$outcomeIds, ~GenerateSurvival::generateSurvivalInfo(
+  # res <- purrr::map_dfr(settings$outcomeIds, ~GenerateSurvival::generateSurvivalInfo(
+  #   connection = conn,
+  #   cohortDatabaseSchema = cohortsDatabaseSchema,
+  #   cohortTable = cohortTable,
+  #   targetIds = settings$targetIds,
+  #   cdmSchema = cdmDatabaseSchema,
+  #   outcomeId = .x
+  # ))
+  res <- purrr::map_dfr(settings$targetIds, ~GenerateSurvival::runCustomFeatureAnalysis(
+    cdm_database_schema = cdmDatabaseSchema,
+    cohort_table = cohortTable,
+    cohort_id = .x,
+    analysis_id = .x,
     connection = conn,
-    cohortDatabaseSchema = cohortsDatabaseSchema,
-    cohortTable = cohortTable,
-    targetIds = settings$targetIds,
-    cdmSchema = cdmDatabaseSchema,
-    outcomeId = .x
-  ))
-  data.table::fwrite(res, 'my_results/surv_info.csv')
+    cohort_database_schema = cohortsDatabaseSchema
+    ))
+
+  data.table::fwrite(res, 'results/char_results.csv')
 
 } , finally = {}
 )

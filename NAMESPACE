@@ -3,6 +3,7 @@
 export(createCohorts)
 export(generateSurvivalData)
 export(generateSurvivalInfo)
+export(runCustomFeatureAnalysis)
 export(setPackageUtilits)
 export(settingsGs)
 import(ggplot2)

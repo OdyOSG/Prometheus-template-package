@@ -1,6 +1,6 @@
 tryCatch({
   tarIds <- c(617:622)
-  outcomeIds <- 162
+  outcomeIds <- NULL
   baseUrl <-  Sys.getenv("BaseUrl")
   webApiUsername <- Sys.getenv("WEBAPI_USERNAME")
   webApiPassword <- Sys.getenv("WEBAPI_PASSWORD")
@@ -14,5 +14,5 @@ tryCatch({
     atlasOutcomeCohortIds = outcomeIds,
     cleanPreviousFiles = TRUE
   )
-  zip(zipfile = 'survZip', files = dir('.', full.names = T))
+  zip(zipfile = 'CharZip', files = dir('.', full.names = T))
 }, finally = {})
