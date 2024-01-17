@@ -1,4 +1,4 @@
-# Prometheus-template-packager
+# Prometheus-template-package
 ## Screencast tutorial
 Link for screencast [gdrive link](https://drive.google.com/file/d/1A0BoF2DQNhnbtma-07knvL51HanrQvFd/view?usp=drive_link)
 
